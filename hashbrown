@@ -46,11 +46,7 @@ class HashTable:
         # If key is not new, update the old corresponding value to the new one.
         index = hash(key) % len(self.table)
         newitem = HashTable.Node(key, value)
-        match = False
-        for i in range(0, len(self.keys)):
-            if self.keys[i] == key:
-                match = True
-        if not match:
+        if not self.__contains__(key):
             self.keys.append(key)
             if self.table[index] == None:
                 self.table[index] = newitem
@@ -90,8 +86,12 @@ class HashTable:
         index = hash(key) % len(self.table)
         if self.table[index] is None:
             return False
-        elif self.table[index].key == key:
-            return True
+        else: 
+            i = self.table[index]
+            while i is not None:
+                if i.key == key:
+                    return True
+                i = i.next
         return False
 
     def __iter__(self):
@@ -139,14 +139,3 @@ print("To test whether collisions are handled correctly, "
       "we keep inserting eight more letters.")
 print("Since there are 10 spots and", len(ht1) ,"letters, by pigeonhole principle, a collision is guaranteed.")
 print("Now, ht1 becomes", ht1, ".")
-# print("a" in ht1)
-# print("b" in ht1)
-# print("c" in ht1)
-# print("d" in ht1)
-# print("e" in ht1)
-# print("f" in ht1)
-# print("g" in ht1)
-# print("h" in ht1)
-# print("i" in ht1)
-# print("j" in ht1)
-# print("k" in ht1)
